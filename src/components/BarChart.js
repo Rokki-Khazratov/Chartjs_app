@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(
   CategoryScale,
@@ -73,10 +74,16 @@ const BarChart = ({ data }) => {
         position: 'top'
       },
       tooltip: {
-        callbacks: {
-          label: function(context) {
-            return `${datasets[selectedDataset].label}: ${context.raw}`;
-          }
+        enabled: false
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'top',
+        formatter: function(value) {
+          return value;
+        },
+        font: {
+          weight: 'bold'
         }
       }
     },
@@ -127,7 +134,11 @@ const BarChart = ({ data }) => {
           <option value="allocatedFunds">{data.columns.allocatedFunds}</option>
         </select>
       </div>
-      <Bar options={options} data={chartData} />
+      <Bar 
+        options={options} 
+        data={chartData}
+        plugins={[ChartDataLabels]}
+      />
     </div>
   );
 };
