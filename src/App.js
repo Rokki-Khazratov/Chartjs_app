@@ -1,16 +1,19 @@
 import React from 'react';
-import BarChart from './components/BarChart';
-import chartData from './data/chartData.json';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import BarChartPage from './pages/BarChartPage';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Ҳудудлар бўйича лойиҳалар статистикаси</h1>
-      <div className="chart-container">
-        <BarChart data={chartData} />
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/bar" element={<BarChartPage />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
